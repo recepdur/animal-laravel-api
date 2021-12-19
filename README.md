@@ -10,6 +10,28 @@ php artisan serve
 #### heroku için; proje dizininde Procfile oluşturmalı içeriği
 web: vendor/bin/heroku-php-apache2 public/
 
+#### create model
+php artisan make:model Animal
 
-https://www.positronx.io/build-secure-php-rest-api-in-laravel-with-sanctum-auth/
-https://www.laravelcode.com/post/laravel-8-sanctum-api-authentication-tutorial
+#### create migration
+php artisan make:migration create_animals_table
+
+#### create controller
+php artisan make:controller AnimalController --invokable
+
+#### create model with all 
+php artisan make:model Animal --migration --controller --resource --requests
+
+#### apply migrations to db
+php artisan migrate
+
+#### update db create new migration and apply
+php artisan make:migration update_animals_table
+change up function
+php artisan migrate
+
+#### that's gonna drop all the tables
+php artisan migrate:fresh
+
+#### rollback migrate by step
+php artisan migrate:rollback --step=1
