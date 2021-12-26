@@ -13,7 +13,7 @@ class UpdateAnimalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('animals', function (Blueprint $table) {
+        Schema::table('animals', function (Blueprint $table) {
             $table->dateTime('birthday')->nullable()->change();
 			$table->string('race', 50)->nullable()->change();
 			$table->string('gender', 15)->nullable()->change();

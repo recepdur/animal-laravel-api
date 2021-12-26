@@ -25,9 +25,9 @@ php artisan make:model Animal --migration --controller --resource --requests
 #### apply migrations to db
 php artisan migrate
 
-#### update db create new migration and apply
+#### update db - create new migration and apply
 php artisan make:migration update_animals_table
-change up function
+change up function - Schema::table...
 php artisan migrate
 
 #### that's gonna drop all the tables
