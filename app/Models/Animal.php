@@ -10,17 +10,21 @@ class Animal extends Model
     use HasFactory;   
     protected $fillable = [ 
         'ear_no',
-        'birthday',
+        'name',
+        'status',
         'race',
         'gender',
-        'status',
-        'mother_ear_no'
-    ];
-    
-    // public function customer() 
-    // {
-    //     return $this->belongsTo('Customer', 'customer_id');
-    // }
+        'mother_ear_no',
+        'father_ear_no',
+        'description',
+        'birth_date',
+        'arrival_date',
+    ]; 
+
+    public function user() 
+    {
+        return $this->belongsTo('User', 'user_id');
+    }
 		
 	// public function inseminations() 
     // {

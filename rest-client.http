@@ -1,0 +1,69 @@
+@apiurl_1 = http://localhost:8000/api
+@accessToken = {{login.response.body.$.data.token}}
+@userId = {{login.response.body.$.data.user_id}}
+
+###
+GET {{apiurl_1}}
+Content-Type: application/json
+
+###
+# @name login
+POST {{apiurl_1}}/login
+Content-Type: application/json
+
+{  
+    "email": "recep_1@gmail.com",
+    "password": "123456"
+}
+
+###
+POST {{apiurl_1}}/register
+Content-Type: application/json 
+
+{ 
+    "name" :"Recep 1", 
+    "email": "recep_1@gmail.com",
+    "password": "123456",
+    "confirm_password": "123456"
+}
+
+###
+GET {{apiurl_1}}/animals
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+GET {{apiurl_1}}/animals/1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+POST {{apiurl_1}}/animals
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{  
+    "userId":"{{userId}}",
+    "firstName": "müşteri 4",
+    "lastName": "müşteri 4",
+    "phone": "05449128008",
+    "email": "musteri4@gmail.com",
+    "tcNo": "987654321"
+}
+
+###
+PUT {{apiurl_1}}/animals
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{  
+    // "userId":"{{userId}}",
+    // "firstName": "müşteri 4",
+    // "phone": "05449128008",
+    "lastName": "musteri34@gmail.com"
+}
+
+###
+DELETE  {{apiurl_1}}/animals/1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}

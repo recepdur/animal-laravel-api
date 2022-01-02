@@ -61,4 +61,15 @@ class AnimalController extends BaseController
         $animal->delete();
         return $this->sendResponse([], 'Post deleted.');
     }
+
+     /**
+     * Search for a name
+     *
+     * @param  str  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function search($name)
+    {
+        return Animal::where('name', 'like', '%'.$name.'%')->get();
+    }
 }

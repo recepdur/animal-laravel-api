@@ -15,12 +15,18 @@ class CreateAnimalsTable extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
-			$table->string('ear_no', 25);
-			$table->dateTime('birthday');
-			$table->string('race', 50);
-			$table->string('gender', 15);
-			$table->string('status', 15);
-            $table->string('mother_ear_no', 25); 
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+			$table->string('ear_no')->nullable();
+            $table->string('name')->nullable();
+            $table->string('status')->nullable();
+			$table->string('race')->nullable();
+			$table->string('gender')->nullable();
+            $table->string('mother_ear_no')->nullable();
+            $table->string('father_ear_no')->nullable(); 
+            $table->string('description')->nullable();
+			$table->dateTime('birth_date')->nullable();
+            $table->dateTime('arrival_date')->nullable();  
             $table->timestamps();
         });
     }
