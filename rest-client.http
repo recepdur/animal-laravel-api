@@ -1,4 +1,5 @@
 @apiurl_1 = http://localhost:8000/api
+@apiurl_2 = https://rcp-laravel-api.herokuapp.com/api
 @token = {{login.response.body.$.data.token}}
 
 ###
