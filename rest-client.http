@@ -1,6 +1,5 @@
 @apiurl_1 = http://localhost:8000/api
-@accessToken = {{login.response.body.$.data.token}}
-@userId = {{login.response.body.$.data.user_id}}
+@token = {{login.response.body.$.data.token}}
 
 ###
 GET {{apiurl_1}}
@@ -30,40 +29,34 @@ Content-Type: application/json
 ###
 GET {{apiurl_1}}/animals
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{token}}
 
 ###
-GET {{apiurl_1}}/animals/1
+GET {{apiurl_1}}/animals/2
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{token}}
 
 ###
 POST {{apiurl_1}}/animals
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{token}}
 
-{  
-    "userId":"{{userId}}",
-    "firstName": "müşteri 4",
-    "lastName": "müşteri 4",
-    "phone": "05449128008",
-    "email": "musteri4@gmail.com",
-    "tcNo": "987654321"
+{
+    "ear_no": "TR123",
+    "name": "test",
+    "gender": "Dişi"
 }
 
 ###
-PUT {{apiurl_1}}/animals
+PUT {{apiurl_1}}/animals/2
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{token}}
 
 {  
-    // "userId":"{{userId}}",
-    // "firstName": "müşteri 4",
-    // "phone": "05449128008",
-    "lastName": "musteri34@gmail.com"
+     "ear_no": "TR1234"
 }
 
 ###
 DELETE  {{apiurl_1}}/animals/1
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{token}}

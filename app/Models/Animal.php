@@ -10,6 +10,7 @@ class Animal extends Model
     use HasFactory;   
     protected $fillable = [ 
         'ear_no',
+        'user_id',
         'name',
         'status',
         'race',

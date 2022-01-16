@@ -17,11 +17,11 @@ class CreateAnimalsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->enum('status', ['Aktif', 'Pasif'])->default('Aktif');
+            $table->enum('gender', ['Erkek', 'Dişi'])->nullable();
 			$table->string('ear_no')->nullable();
             $table->string('name')->nullable();
-            $table->string('status')->nullable();
 			$table->string('race')->nullable();
-			$table->string('gender')->nullable();
             $table->string('mother_ear_no')->nullable();
             $table->string('father_ear_no')->nullable(); 
             $table->string('description')->nullable();

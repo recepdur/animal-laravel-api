@@ -17,8 +17,8 @@ class BaseController extends Controller
     {
     	$response = [
             'success' => true,
+            'message' => $message, 
             'data'    => $result,
-            'message' => $message,
         ];
 
         return response()->json($response, 200);

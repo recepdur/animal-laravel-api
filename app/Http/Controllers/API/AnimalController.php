@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
    
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
-use Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Animal;
 use App\Http\Resources\Animal as AnimalResource;
    
@@ -12,8 +13,10 @@ class AnimalController extends BaseController
 {
     public function index()
     {
-        $animals = Animal::all();
-        return $this->sendResponse(AnimalResource::collection($animals), 'Posts fetched.');
+        $userid = Auth::user()->id;
+        $animals = Animal::where('user_id',$userid)->get();
+        //$animals = Animal::all();
+        return $this->sendResponse(AnimalResource::collection($animals), 'Animals fetched.');
     }
     
     public function store(Request $request)
@@ -25,20 +28,24 @@ class AnimalController extends BaseController
         if($validator->fails()){
             return $this->sendError($validator->errors());       
         }
+
+        $userid = Auth::user()->id; 
+        $input["user_id"] = $userid; 
+
         $animal = Animal::create($input);
-        return $this->sendResponse(new AnimalResource($animal), 'Post created.');
+        return $this->sendResponse(new AnimalResource($animal), 'Animal created.');
     }
 
     public function show($id)
     {
         $animal = Animal::find($id);
         if (is_null($animal)) {
-            return $this->sendError('Post does not exist.');
+            return $this->sendError('Animal does not exist.');
         }
-        return $this->sendResponse(new AnimalResource($animal), 'Post fetched.');
+        return $this->sendResponse(new AnimalResource($animal), 'Animal fetched.');
     }
 
-    public function update(Request $request, Animal $animal)
+    public function update(Request $request, $id)
     {
         $input = $request->all();
 
@@ -50,24 +57,27 @@ class AnimalController extends BaseController
             return $this->sendError($validator->errors());       
         }
 
+        $animal = Animal::find($id);
+        if (is_null($animal)) {
+            return $this->sendError('Animal does not exist.');
+        }
+        
         $animal->ear_no = $input['ear_no'];
         $animal->save();
         
         return $this->sendResponse(new AnimalResource($animal), 'Post updated.');
     }
    
-    public function destroy(Animal $animal)
-    {
+    public function destroy($id)
+    { 
+        $animal = Animal::find($id);
+        if (is_null($animal)) {
+            return $this->sendError('Animal does not exist.');
+        }
         $animal->delete();
-        return $this->sendResponse([], 'Post deleted.');
+        return $this->sendResponse([], 'Animal deleted.');
     }
 
-     /**
-     * Search for a name
-     *
-     * @param  str  $name
-     * @return \Illuminate\Http\Response
-     */
     public function search($name)
     {
         return Animal::where('name', 'like', '%'.$name.'%')->get();
